@@ -42,6 +42,27 @@ struct arp {
   char target_ip[4];
 } ;
 
+void preencherStruct()
+{
+	struct arp arp;
+	char url[]="teste.txt";
+	FILE *arq;
+	
+	arq = fopen(url, "r");
+	if(arq == NULL)
+		printf("Erro, nao foi possivel abrir o arquivo\n");
+	else
+		fread(&arp,sizeof(arq),1,arq);
+			
+	
+	fclose(arq);
+	printf("%s \n",arp.hw_type);
+	printf("%s \n",arp.pt_type);
+	printf("%s \n",arp.hw_len);
+
+}
+
+
 int payload(char *sendbuf, int tx_len)
 {
         // esse � um exemplo de ARP... 
@@ -87,6 +108,7 @@ int payload(char *sendbuf, int tx_len)
 
 int main(int argc, char *argv[])
 {
+	preencherStruct();	
 	int sockfd;
 	struct ifreq if_idx;
 	struct ifreq if_mac;
